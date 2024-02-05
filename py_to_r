@@ -1,0 +1,11 @@
+def diff_order(data, max_d = 5):
+  np.seterr(divide = 'ignore') 
+  for d in range(max_d + 1):
+      diff_data = data.diff(d).dropna() 
+      print(diff_data.head())
+      print(data.head())
+      adf_result = adfuller(diff_data)
+      p_value = adf_result[1]
+      if p_value <= 0.05:
+         return d, diff_data
+d_order, df_xtd_train_diff = diff_order(df_xtd_train)
